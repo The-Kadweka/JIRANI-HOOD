@@ -1,0 +1,46 @@
+{%extends "registration/base.html"%}
+{% load bootstrap3 %}
+{%load static%}
+
+{% block content %}
+<div class="container w3-margin-top">
+    <div class="w3-row-padding">
+        <!-- <div class="w3-col l6 w3-hide-medium w3-hide-small">
+            <img src="{%static 'images/sign.jpg'%}" style="width:100%; height:auto">
+        </div> -->
+        <div class="w3-col l12 m12 w3-mobile">
+            {% if form.errors %}
+            <p> Password or Username is incorrect </p>
+            {% endif %}
+
+            <div class="w3-card-4">
+                <header class="w3-container ">
+                    <h2 class="text-center insta">Hood Watch</h2>
+                    <hr>
+                </header>
+
+                <div class="w3-container">
+                    <form action="/accounts/login/" method="post" class="w3-container">
+                        {% csrf_token %}
+                        {% bootstrap_form form%}
+                        <div class="form-group">
+                            <input type="submit" class="w3-button w3-block w3-blue w3-round" value="Login">
+                        </div>
+                        <input type="hidden" name="next" value="{{next}}">
+                    </form>
+                </div>
+                <!-- </div>
+                <hr>
+                <div class="w3-card-4 w3-margin-top w3-padding"> -->
+                <hr>
+                <div class="w3-container w3-padding">
+                    <p class="w3-center" style="font-size: 18px;"> Don't have an account? <a
+                            class="w3-button w3-bar-item w3-centre w3-green" href="/accounts/register">Sign Up</a> </p>
+                </div>
+                <!-- </div> -->
+            </div>
+            <div class="w3-col l2"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

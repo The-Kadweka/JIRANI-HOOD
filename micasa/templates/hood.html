@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% load static%}
+
+{% block content %}
+<div class="w3-display-container w3-animate-opacity ">
+    <img src="{{hood.image.cdn_url}} " alt="hourglass"
+        style="width:100%;min-height:350px;max-height:400px;filter: brightness(40%);">
+    <div class="w3-display-topmiddle w3-text-white w3-center w3-padding-top" style="margin-top:5%">
+        <strong class="w3-xlarge"><i class="fas fa-map-marker-alt "></i> {{ hood.name }}, </strong>
+        <strong class="w3-xlarge">{{hood.location}}</strong>
+    </div>
+
+    <div class="w3-display-middle  w3-center ">
+        <form class="navbar-form " role="search" action="{%url 'search_category' %}">
+            <input type="text" name="Category" placeholder="&#xF002;  Search Business Category" id="input"
+                class="w3-input w3-round-xxlarge" style="font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit; width:200px;">
+        </form>
+
+        <strong class="w3-xlarge">Hood-Admin: {{hood.owner}}</strong>
+    </div>
+
+    <div class="w3-display-bottomright">
+        <p>
+            <a class="info w3-btn w3-round-xxlarge w3-pink w3-text-white w3-margin-right"
+                href="{% url 'leave' hood_id=hood.id %}">Leave Hood </a>
+        </p>
+
+    </div>
+
+    <div class="w3-display-bottomleft">
+        <p><a class="info w3-btn w3-round-xxlarge w3-pink w3-text-white w3-margin-left"
+                href="{% url 'upload_business' %}">Add Business</a></p>
+    </div>
+
+</div>
+
+<div class="w3-container">
+    <br>
+    <div class="w3-row">
+        <div class=" w3-padding w3-center">
+            <a href="/upload_business"><i class="fas fa-briefcase fa-2x w3-center w3-text-pink"></i>
+                <h3><strong>Businesses</strong></h3>
+            </a>
+            <hr>
+        </div>
+
+        <table class="w3-table w3-bordered">
+            <tr>
+                <th>Business Name</th>
+                <th>Email address</th>
+                <th>Category</th>
+                <th>Owner</th>
+            </tr>
+            {% for biz in businesses%}
+            <tr>
+                <td>{{biz.business_name}}</td>
+                <td>{{biz.address}}</td>
+                <td>{{biz.category}}</td>
+                <td>{{biz.owner.username}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+    <br>
+    <div class="w3-row">
+        <div class=" w3-padding w3-center">
+            <a href="/post"><i class="fas fa-pen-square fa-2x w3-center w3-text-pink"></i>
+                <h3><strong>Street Smarts</strong></h3>
+            </a>
+            <hr>
+        </div>
+
+        <div>
+            <div class="w3-row-padding">
+                {% for post in posts%}
+                <div class="w3-col l6">
+
+                    <div class="w3-card-2 w3-center ">
+
+                        <header class="w3-container w3-serif ">
+                            <h3>{{post.title}}!!</h3>
+                            <hr>
+                        </header>
+
+                        <div class="w3-container">
+                        </div>
+
+                        <footer class="w3-container">
+                            <blockquote class="w3-panel w3-leftbar w3-light-grey">
+                                <p class="w3-large">
+                                    <i>
+                                        <p>{{post.description}}</p>
+                                    </i></p>
+                                <p>~ {{user.username}}</p>
+                            </blockquote>
+                        </footer>
+
+                    </div>
+
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+        <br>
+        <br>
+        <div class="w3-row">
+
+            <div class="w3-row w3-center">
+                <br>
+                <div class="w3-col l6 m6 s12">
+                    <i class="fas fa-hospital-symbol fa-2x w3-text-pink"></i>
+                    <br>
+                    <h3>Health Care Department</h3>
+
+                    <div class="w3-card-4 w3-white w3-padding w3-margin ">
+                        <header>
+                            <h4><strong>Contact Information</strong></h4>
+                            <hr>
+                        </header>
+
+                        <div class="w3-container w3-margin">
+
+                            <p><i class="fas fa-at"></i> {{hood.name}} General Hospital</p>
+                            <hr>
+                            <p><i class="fas fa-map-marker-alt"></i> {{hood.name}} Main Road</p>
+                            <hr>
+                            <p><i class="fas fa-phone"></i>Emergency contact: 07111222333</p>
+                            <hr>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="w3-col l6 m6 s12 ">
+                    <i class="fas fa-shield-alt fa-2x w3-text-pink"></i>
+                    <br>
+                    <h3>Police Department</h3>
+
+                    <div class="w3-card-4 w3-white w3-padding w3-margin ">
+                        <header>
+                            <h4><strong>Contact Information</strong></h4>
+                            <hr>
+                        </header>
+                        <div class="w3-container w3-margin">
+
+                            <p><i class="fas fa-at"></i> {{hood.name}} Police Station</p>
+                            <hr>
+                            <p><i class="fas fa-map-marker-alt"></i> {{hood.name}} Main Road </p>
+                            <hr>
+                            <p><i class="fas fa-phone"></i> Emergency contact: 911</p>
+                            <hr>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

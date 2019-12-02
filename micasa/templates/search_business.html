@@ -1,0 +1,49 @@
+{%extends 'base.html'%}
+{% block content %}
+<div class="w3-container" id="search">
+
+    <div class="w3-row">
+        {% if Category%}
+        <h2>Found {{ Category|length }} of searched term {{message}}</h2>
+        {% else %}
+        <h2> Sorry we have no businesses in {{message}} category</h2>
+        {% endif %}
+
+    </div>
+
+    <div class="w3-row">
+        {% if Category %}
+
+        <div class="w3-row">
+            <div class=" w3-padding w3-center">
+                <a href="/upload_business"><i class="fas fa-briefcase fa-2x w3-center "></i>
+                    <h3><strong>Businesses</strong></h3>
+                </a>
+                <hr>
+            </div>
+
+            <table class="w3-table w3-bordered">
+                <tr>
+                    <th>Business Name</th>
+                    <th>Email address</th>
+                    <th>Category</th>
+                    <th>Owner</th>
+                </tr>
+                {% for biz in Category %}
+                <tr>
+                    <td>{{biz.business_name}}</td>
+                    <td>{{biz.address}}</td>
+                    <td>{{biz.category}}</td>
+                    <td>{{biz.owner.username}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static%}
+
+{% block content %}
+<div class="w3-display-container bgimg-1 " id="home">
+
+    <div class="w3-display-middle w3-center">
+        <h3 class="w3-text-white">Find Your Best Hood</h3>
+        <form class="navbar-form " role="search" action="{% url 'search_results' %}">
+            <input type="text" name="search" placeholder="&#xF002;  Search Hood" id="input"
+                class="w3-input w3-round-xxlarge"
+                style="font-family: FontAwesome; font-style: normal;  font-weight: normal; text-decoration: inherit; width:500px;">
+        </form>
+        {% if request.user.profile.hood %}
+        <small class="w3-text-white">
+            <button class='btn' style="background-color: #EB4762">
+                <a href="{% url 'hood' hood_id=request.user.profile.hood.id %}"> View Your Current Hood </a>
+            </button>
+        </small>
+
+        {% else %}
+
+    </div>
+</div>
+
+<div class="w3-container">
+    <div class="w3-row">
+        <h2 class="w3-center"></h2>
+        {% for hood in hoods %}
+        <div class="w3-col l4 m6 s12 w3-padding">
+            <div class="w3-card-4 w3-white" style="padding-bottom:5px;padding-top:3px;">
+                <div class="w3-container w3-margin">
+                    <a href="{% url 'hood' hood_id=hood.id %}">
+                        <strong><i class="fas fa-map-marker-alt"></i> {{ hood.name }}, </strong>
+                        <strong>{{hood.location}}</strong>
+                    </a>
+                </div>
+
+                <header class="hovereffect" style="height:300px">
+                    <img src=" {{ hood.image.cdn_url }}" class="img-responsive w3-image w3-center"
+                        style="min-height:100%; max-height:100%">
+                </header>
+
+                <div class="w3-container w3-margin">
+                    <p><a class="info w3-btn w3-round-xxlarge w3-pink" href="{% url 'join' hood_id=hood.id %}">
+                            Join Hood </a></p>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endif %}
+
+{% endblock %}

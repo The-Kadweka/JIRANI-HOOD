@@ -1,0 +1,50 @@
+{%extends "registration/base.html"%}
+{% load bootstrap3 %}
+{%load static%}
+{% block content %}
+<div class="container">
+    <br>
+    <div class="w3-row-padding">
+        <!-- <div class="w3-col l6">
+            <img src="{%static 'images/sign.jpg'%}" style="width:100%; height:auto">
+        </div> -->
+        <div class="w3-col l12 m12 w3-mobile">
+            {% if form.errors %}
+            <p> Some Information Might be Incorrect </p>
+            {% endif %}
+            <div class="w3-card-4">
+                <header class="w3-container ">
+                    <h2 class="text-center insta">Hood Watch</h2>
+                </header>
+                <div class="w3-container">
+                    <form action="/accounts/register/" method="post" class="w3-container">
+                        {% csrf_token %}
+                        {% bootstrap_form form%}
+                        <div class="form-group">
+                            <input type="submit" class="w3-button w3-block w3-blue w3-round" value="Sign up">
+                        </div>
+                        <input type="hidden" name="next" value="{{next}}">
+                    </form>
+                    <p id='toothless' class="w3-center ">By signing up, you agree to our <strong>Terms , Data
+                            Policy </strong> and <strong>Cookies Policy </strong>.</p>
+                </div>
+                <hr>
+                <div class="w3-container w3-padding">
+                    <p class="w3-center" style=" color: white; font-size: 18px;"> Already have an account? <a
+                            class="w3-button w3-bar-item w3-centre w3-green" href="/accounts/login">Login</a> </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .help-block {
+        color: black;
+    }
+
+    #toothless {
+        color: white;
+    }
+</style>
+{% endblock %}
